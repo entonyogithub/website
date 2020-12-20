@@ -1,0 +1,62 @@
+run composer global require "fxp/composer-asset-plugin:~1.1.1"
+run composer install
+composer update
+
+run yii migrate after (edit profile field and remove not needed tables) 
+run yii migrate --migrationPath=@yii/rbac/migrations
+copy /assets/yii2-admin/views folder to  /vendor/mdmsoft/yii2-admin
+---------------- (for api module) --------------------
+run yii migrate --migrationPath=@vendor/filsh/yii2-oauth2-server/migrations
+add this to user model, \OAuth2\Storage\UserCredentialsInterface class
+/***********************/
+override this function
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null) {
+        $user_by_access_token = \filsh\yii2\oauth2server\models\OauthAccessTokens::findOne(['access_token' => $token]);
+        if ($user_by_access_token)
+            return static::findOne(['id' => $user_by_access_token->user_id, 'status' => self::STATUS_ACTIVE]);
+    }
+/***********************/
+add oauth to modules :
+        'oauth2' => [
+            'class' => 'filsh\yii2\oauth2server\Module',
+            'tokenParamName' => 'accessToken',
+            'tokenAccessLifetime' => 3600 * 24,
+            'storageMap' => [
+                'user_credentials' => 'common\models\User'
+            ],
+            'grantTypes' => [
+                'client_credentials' => [
+                    'class' => 'OAuth2\GrantType\ClientCredentials',
+                    'allow_public_clients' => false
+                ],
+                'user_credentials' => [
+                    'class' => 'OAuth2\GrantType\UserCredentials'
+                ],
+                'refresh_token' => [
+                    'class' => 'OAuth2\GrantType\RefreshToken',
+                    'always_issue_new_refresh_token' => true
+                ]
+            ],
+        ],
+
+add response to componants in frontend
+    'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null) {
+                    if (is_array($response->data)) {
+                        if (!$response->isSuccessful && $response->data['type'] == 'filsh\yii2\oauth2server\exceptions\HttpException') {
+                            $response->data = [
+                                'success' => 0,
+                                'errors' => [$response->data['message']],
+                            ];
+                            $response->statusCode = 200;
+                        }
+                    } 
+                }
+            },
+                ],

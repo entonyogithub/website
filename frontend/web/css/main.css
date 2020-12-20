@@ -1,0 +1,67 @@
+/* Fonts Variables */
+@font-face {
+  font-family: LTBukra-Bold;
+  src: url(../fonts/29LTBukra-Bold.eot);
+  src: url(../fonts/29ltbukrabold.ttf) format("opentype"), url(../fonts/29LTBukra-Regular.WOFF) format("woff");
+  font-style: normal;
+  font-weight: normal; }
+@font-face {
+  font-family: LTBukra-Regular;
+  src: url(../fonts/29LTBukra-Regular.eot);
+  src: url(../fonts/29ltbukraregular.ttf) format("opentype"), url(../fonts/29LTBukra-Regular.WOFF) format("woff");
+  font-style: normal;
+  font-weight: normal; }
+body {
+  font-size: 24px;
+  font-family: "LTBukra-Regular";
+  color: #ffffff; }
+
+:focus {
+  outline: 0; }
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none; }
+
+.form-control:focus {
+  border-color: transparent; }
+
+.form-control.form-text:focus {
+  border: 1px solid #ccc; }
+
+.form-control {
+  box-shadow: none; }
+
+.date {
+  font-family: "LTBukra-Regular"; }
+
+.wrapper {
+  width: 100%;
+  padding: 0 2em;
+  max-width: 1920px;
+  margin: 0 auto;
+  position: relative; }
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.btn-more:hover,
+.btn-more {
+  color: #ffffff;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  display: block;
+  text-decoration: none;
+  margin-top: 10px;
+  font-family: "LTBukra-Bold"; }
+
+a:focus,
+.form-control:focus,
+.btn:hover, .btn:focus, .btn.focus {
+  box-shadow: none;
+  outline: 0; }
+
+/*# sourceMappingURL=main.css.map */

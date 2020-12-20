@@ -1,0 +1,61 @@
+/* Fonts Variables */
+$bold:'LTBukra-Bold';
+$regular:'LTBukra-Regular';
+
+// Primary Colors
+$defaultColor: #ffffff;
+$titleColor:#ffffff;
+$float:left;
+
+
+
+// Media Queries variables
+$breakpoints: (
+'mobile'   : '480px',
+'tablet': '768px',
+'x-large'  : '1680px',
+'xx-large'  : '1900px'
+);
+// Media queries
+@mixin respond-to($breakpoint) {
+    // Retrieves the values from the key
+    $value: map-get($breakpoints, $breakpoint);
+
+    // if the key exists in the map-get
+    @if $value != null {
+        // Prints a media query based on the value
+        @if($breakpoint=='mobile'){
+            @media (max-width: $value) {
+                @content;
+            }
+        }@elseif($breakpoint=='tablet'){
+            @media (max-width: $value) {
+                @content;
+            }
+        }@elseif($breakpoint=='x-large'){
+            @media (max-width: $value) {
+                @content;
+            }
+        }@elseif($breakpoint=='xx-large'){
+            @media (max-width: $value) {
+                @content;
+            }
+        }
+        @else{
+            @media (min-width: $value) {
+                @content;
+            }
+        }
+
+    }
+    // If the key doesn't exist in the map
+    @else {
+        @warn "Value `#{$breakpoint}` doesn't exist in `$breakpoints` map ."
+    }
+};
+@mixin wrapper{
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+}

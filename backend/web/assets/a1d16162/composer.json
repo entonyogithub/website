@@ -1,0 +1,30 @@
+{
+    "name": "springdev/yii2-urban-theme",
+    "description": "Backend theme for Yii2 Framework",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","urban"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Rabie awamleh",
+            "email": "rabie@hellospring.net"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "2.*",
+        "yiisoft/yii2-bootstrap": "2.*",
+        "cebe/yii2-gravatar": "1.*",
+        "almasaeed2010/adminlte": "~2.0",
+        "rmrevin/yii2-fontawesome": "~2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "springdev\\urban\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

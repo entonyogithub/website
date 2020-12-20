@@ -1,0 +1,3 @@
+with work only when you add all() or one() and the end of query.
+Search join work with joinWith() finction
+
